@@ -1,0 +1,68 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "cmake - gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/lyt/leetcode/test",
+            "args": [
+                // "-i",
+                // "juren-5s.mp4",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "single file - gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/lyt/FFmpeg-n4.4.1/ffplay_g",
+            "args": [
+                // command arguments
+                "ffplay -i juren-5s.mp4"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "C/C++: Compile Using g++"
+        },
+        {
+            "name": "attach process - gdb",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    ]
+}
