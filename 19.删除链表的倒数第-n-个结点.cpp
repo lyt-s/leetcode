@@ -18,27 +18,25 @@
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *dummy = new ListNode(0);
-        dummy->next = head;
-        ListNode *pre = dummy;
-        ListNode *dummyHeade = dummy;
-
-        while (n--&&dummy!=NULL){
-            dummy=dummy->next;
-            if(dummy == nullptr && n) {
-                return nullptr;
+        ListNode *dummyHead = new ListNode(0);
+        dummyHead->next = head;
+        // 应对 一个节点，且删除倒数第一的节点，所以其实要在头节点前一个结点
+        ListNode *slow = dummyHead;
+        ListNode *fast = dummyHead;
+        for(int i = 0; i < n; i++) {
+            if(fast != nullptr) {
+                fast = fast->next;
             }
         }
-        // 这里dummy->next != nullptr ,就是为了让pre指向删除节点的上一个节点。
-        while(dummy->next!=NULL){
-            pre=pre->next;
-            dummy=dummy->next;
+        fast = fast->next;
+        while(fast != nullptr){
+            fast = fast->next;
+            slow = slow->next;
         }
-
-        ListNode *temp = pre->next;
-        pre->next = temp->next;
+        ListNode *temp = slow->next;
+        slow->next = temp->next;
         delete temp;
-        return dummyHeade->next;
+        return dummyHead->next;
     }
 };
 // @lc code=end
