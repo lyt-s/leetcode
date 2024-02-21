@@ -17,19 +17,32 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        ListNode *prev = nullptr;
-        ListNode *cur = head;
-        ListNode *next = nullptr;
+    // 迭代法
+    // ListNode* reverseList(ListNode* head) {
+    //     ListNode *prev = new ListNode(0);
+    //     ListNode *cur = head;
+    //     prev->next = nullptr;
+    //     while(cur){
+    //         ListNode *temp = cur->next;
+    //         cur->next = prev->next;
+    //         prev->next = cur;
+    //         cur = temp;
+    //     }   
+    //     return prev->next;
+    // }
 
-        while (cur) {
-            next = cur->next;
-            cur->next = prev;
-            prev = cur;
-            cur = next;
-        }
-        return prev;
+    ListNode *reverseList(ListNode *head){
+        if(head == nullptr || head->next == nullptr){
+            return head;
+        } 
+
+        ListNode* new_head = reverseList(head->next);
+        head->next->next = head;
+        head->next = nullptr;
+
+        return new_head;
     }
+
 };
 // @lc code=end
 

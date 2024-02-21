@@ -8,16 +8,16 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        int end = nums.size()-1;
+        int index = nums.size()-1;
         vector<int> result(nums.size(),0);
-        for (int i = 0,j = nums.size()-1; i <= j;) {
-            if(nums[i]*nums[i] >= nums[j]*nums[j]){
-                result[end--] = nums[i]*nums[i];
+        for(size_t i = 0 , j = nums.size()-1; i <= j && index >= 0; ) {
+            if(nums[i]* nums[i] > nums[j]*nums[j]){
+                result[index--] = nums[i]*nums[i];
                 i++;
-             }else{
-                result[end--] = nums[j]*nums[j];
+            }else {
+                result[index--] = nums[j]*nums[j];
                 j--;
-             }
+            }
         }
         return result;
 

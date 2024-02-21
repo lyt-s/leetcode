@@ -17,24 +17,42 @@
  */
 class Solution {
 public:
-    ListNode* removeElements(ListNode* head, int val) {
-       while(head != nullptr && head->val == val) {
-        ListNode *tmp = head;
-        head = head->next;
-        delete tmp;
-       }
+    // ListNode* removeElements(ListNode* head, int val) {
+    //    while(head != nullptr && head->val == val) {
+    //     ListNode *tmp = head;
+    //     head = head->next;
+    //     delete tmp;
+    //    }
 
-       ListNode *cur = head;
-       while(cur != nullptr && cur->next != nullptr) {
-        if(cur->next->val == val) {
-            ListNode *tmp = cur->next;
-            cur->next = cur->next->next;
-            delete tmp;
-        }else{
-            cur = cur->next;
+    //    ListNode *cur = head;
+    //    while(cur != nullptr && cur->next != nullptr) {
+    //     if(cur->next->val == val) {
+    //         ListNode *tmp = cur->next;
+    //         cur->next = cur->next->next;
+    //         delete tmp;
+    //     }else{
+    //         cur = cur->next;
+    //     }
+    //    }
+    //    return head;
+    // }
+    ListNode *removeElements(ListNode *head, int val){
+        while(head!= nullptr && head->val == val){
+            ListNode *temp = head;
+            head = head->next;
+            delete temp;
         }
-       }
-       return head;
+        ListNode *cur = head;
+        while(cur != nullptr && cur->next != nullptr){
+            if(cur->next->val == val){
+                ListNode *tmp = cur->next;
+                cur->next = cur->next->next;
+                delete tmp;
+            }else{
+                cur = cur->next;
+            }
+        }
+        return head;
     }
 };
 // @lc code=end

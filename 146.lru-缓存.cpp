@@ -53,3 +53,32 @@ public:
     }
 };
 
+class LRUCache {
+private:
+
+    list<pair<int,int>> m_list;  // [key,value]
+    map<int,decltype<m_list.begin()> m_map; // [key, iterator]
+    int m_capacity;
+
+    void update(int key, int value){
+        
+    }
+
+    void addNewPoint(int key, int value){
+
+    }
+public:
+
+    LRUCache(int capacity) :m_capacity(capacity) {
+
+    }
+    
+    int get(int key) {
+
+    }
+    
+    void put(int key, int value) {
+
+
+    }
+};
