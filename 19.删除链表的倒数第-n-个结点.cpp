@@ -17,26 +17,48 @@
  */
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode *dummyHead = new ListNode(0);
-        dummyHead->next = head;
-        // 应对 一个节点，且删除倒数第一的节点，所以其实要在头节点前一个结点
-        ListNode *slow = dummyHead;
-        ListNode *fast = dummyHead;
-        for(int i = 0; i < n; i++) {
-            if(fast != nullptr) {
-                fast = fast->next;
-            }
+    // ListNode* removeNthFromEnd(ListNode* head, int n) {
+    //     ListNode *dummyHead = new ListNode(0);
+    //     dummyHead->next = head;
+    //     // 应对 一个节点，且删除倒数第一的节点，所以其实要在头节点前一个结点
+    //     ListNode *slow = dummyHead;
+    //     ListNode *fast = dummyHead;
+    //     for(int i = 0; i < n; i++) {
+    //         if(fast != nullptr) {
+    //             fast = fast->next;
+    //         }
+    //     }
+    //     fast = fast->next;
+    //     while(fast != nullptr){
+    //         fast = fast->next;
+    //         slow = slow->next;
+    //     }
+    //     ListNode *temp = slow->next;
+    //     slow->next = temp->next;
+    //     delete temp;
+    //     return dummyHead->next;
+    // }
+
+
+    ListNode* removeNthFromEnd(ListNode* head, int n) {\
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        // 应对删除头节点情况
+        ListNode* fast = dummy;
+        ListNode* slow = dummy;
+        while(n){
+            fast = fast->next;
+            n--;
         }
-        fast = fast->next;
-        while(fast != nullptr){
+        while(fast->next){
             fast = fast->next;
             slow = slow->next;
         }
-        ListNode *temp = slow->next;
+        ListNode* temp = slow->next;
         slow->next = temp->next;
         delete temp;
-        return dummyHead->next;
+        // 返回不要返回head，head可能会删除
+        return dummy->next;
     }
 };
 // @lc code=end

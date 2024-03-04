@@ -17,33 +17,68 @@
  */
 class Solution {
 public:
+    // ListNode* swapPairs(ListNode* head) {
+    //     if (head == nullptr || head->next == nullptr) {
+    //         return head;
+    //     }
+    //     ListNode *dummy = new ListNode(0);
+
+    //     dummy->next = head;
+    //     ListNode* pre = dummy;
+    //     ListNode* cur = head;
+    //     ListNode* tail = cur->next;
+    //     while(tail && cur){
+    //         // 防止断链
+    //         ListNode *tmp = tail->next;
+
+    //         // 两两交换
+    //         pre->next = tail;
+    //         tail->next = cur;
+    //         cur->next = tmp;
+
+    //         // 进行下一轮的交换
+    //         pre = cur;
+    //         if(tmp == nullptr) {
+    //             cur->next = nullptr;
+    //             return dummy->next;
+    //         }
+    //         cur = tmp;
+    //         tail = cur->next;
+    //     }
+    //     return dummy->next;
+    // }
+
+    // 1. 防止断链
+    // 2. temp 记着检测是否为空，否则next指针会出问题
+    
+
     ListNode* swapPairs(ListNode* head) {
-        if (head == nullptr || head->next == nullptr) {
+        if(head == nullptr || head->next == nullptr) {
             return head;
         }
-        ListNode *dummy = new ListNode(0);
-
+        ListNode* pre = new ListNode(0);
+        ListNode* dummy = pre;
         dummy->next = head;
-        ListNode* pre = dummy;
         ListNode* cur = head;
-        ListNode* tail = cur->next;
-        while(tail && cur){
+        ListNode* next = cur->next;
+
+        while(cur && cur->next){
             // 防止断链
-            ListNode *tmp = tail->next;
+            ListNode* temp = next->next;
 
-            // 两两交换
-            pre->next = tail;
-            tail->next = cur;
-            cur->next = tmp;
+            // 进行交换
+            pre->next = next;
+            next->next = cur;
+            cur->next = temp;
 
-            // 进行下一轮的交换
+            // 下一轮准备
             pre = cur;
-            if(tmp == nullptr) {
+            if(temp == nullptr){
                 cur->next = nullptr;
                 return dummy->next;
             }
-            cur = tmp;
-            tail = cur->next;
+            cur = temp;
+            next = cur->next;
         }
         return dummy->next;
     }

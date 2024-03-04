@@ -31,18 +31,34 @@ public:
     //     return prev->next;
     // }
 
+    // ListNode *reverseList(ListNode *head){
+    //     if(head == nullptr || head->next == nullptr){
+    //         return head;
+    //     } 
+
+    //     ListNode* new_head = reverseList(head->next);
+    //     head->next->next = head;
+    //     head->next = nullptr;
+
+    //     return new_head;
+    // }
+
     ListNode *reverseList(ListNode *head){
         if(head == nullptr || head->next == nullptr){
             return head;
-        } 
-
-        ListNode* new_head = reverseList(head->next);
-        head->next->next = head;
-        head->next = nullptr;
-
-        return new_head;
+        }
+        ListNode *prev = new ListNode(-1);
+        prev->next = nullptr;
+        ListNode *current = head;
+        while(current){
+            // 防止断链
+            ListNode *temp = current->next;
+            current->next = prev->next;
+            prev->next = current;
+            current = temp;
+        }
+        return prev->next;
     }
-
 };
 // @lc code=end
 

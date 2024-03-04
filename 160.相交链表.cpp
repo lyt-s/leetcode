@@ -57,14 +57,20 @@ public:
     //      这样，当 pA 和 pB 再次到达链表末尾时，它们走过的节点数相等，且它们所经过的末尾部分节点完全相同。因此，如果链表相交，它们会在相交节点相遇；如果链表不相交，它们会在末尾节点（null）相遇。
     // 3. 返回相交节点或 null。
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *a = headA;
-        ListNode *b = headB;
-        while(a != nullptr || b != nullptr) {
-            if(a == nullptr ) a = headB;
-            if(b == nullptr) b = headA;
-            if(a == b) return a;
-            a = a->next;
-            b = b->next;
+        ListNode *nodeA = headA;
+        ListNode *nodeB = headB;
+        while(nodeA != nullptr || nodeB != nullptr) {
+            if(nodeA == nullptr ){
+                nodeA = headB;
+            }
+            if(nodeB == nullptr){
+                nodeB = headA;
+            }
+            if(nodeA == nodeB){
+                return nodeA;
+            }
+            nodeA = nodeA->next;
+            nodeB = nodeB->next;
         }
         return nullptr;
     }

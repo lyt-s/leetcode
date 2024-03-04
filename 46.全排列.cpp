@@ -6,34 +6,28 @@
 
 // @lc code=start
 class Solution {
-public:
-    vector<vector<int>> result;
+    vector<vector<int>> result();
     vector<int> path;
-    void backtracking(vector<int>& nums, vector<bool>& used){
-        if (path.size() == nums.size())
-        {
-           result.push_back(path);
-           return;
+    void backtract(vector<int>& nums,vector<bool>& used){
+        if(path.size() == nums.size()){
+            result.emplace_back(path);
+            return;
         }
-        for (int  i = 0; i < nums.size(); i++)
-        {
-            if (used[i] == true)
-            {
-                continue;
+        for(int i = 0; i < nums.size(); i++){
+            if(used[i] == false){
+                used[i] = true;
+                path.emplace_back(nums[i]);
+                backtract(nums,used);
+                used[i] = false;
+                path.pop_back();
             }
-            used[i] = true;
-            path.push_back(nums[i]);
-            backtracking(nums, used);
-            used[i] = false;
-            path.pop_back();
-            
         }
-        
-        
     }
-    vector<vector<int>> permute(vector<int>& nums) {
+public:
+  vector<vector<int>> permute(vector<int>& nums) {
+        result.clear();
         vector<bool> used(nums.size(),false);
-        backtracking(nums,used);
+        backtract(nums,used);
         return result;
     }
 };
