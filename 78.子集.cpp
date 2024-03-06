@@ -6,12 +6,27 @@
 
 // @lc code=start
 class Solution {
+    vector<vector<int>> results;
+    vector<int> path;
+
+    void backtrack(vector<int>& nums,int startIndex){
+        if(path.size() > nums.size()){
+            return;
+        }
+        results.emplace_back(path);
+
+        for(int i = startIndex; i < nums.size(); i++){
+            path.push_back(nums[i]);
+            backtrack(nums,i + 1);
+            path.pop_back();
+        }
+    }
 public:
 
     vector<vector<int>> subsets(vector<int>& nums) {
         results.clear();
         path.clear();
-        backtracking(nums,0);
+        backtrack(nums,0);
         return results;
     }
 };
