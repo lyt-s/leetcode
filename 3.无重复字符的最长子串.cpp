@@ -44,19 +44,39 @@ public:
     //     return result;
     // }
 
+    // int lengthOfLongestSubstring(string s) {
+    //     unordered_set<char> un_set;
+    //     int right_k = -1;
+    //     int result = 0;
+    //     for(int i = 0; i < s.length(); ++i){
+    //         if( i != 0){
+    //             un_set.erase(s[i-1]);
+    //         }
+    //         while(right_k +1 <s.length() && un_set.count(s[right_k + 1]) == 0){
+    //             un_set.insert(s[right_k + 1]);
+    //             right_k++;
+    //         }
+    //         result = max(result, right_k - i +1);
+    //     }
+    //     return result;
+    // }
+
+
     int lengthOfLongestSubstring(string s) {
-        unordered_set<char> un_set;
-        int right_k = -1;
-        int result = 0;
-        for(int i = 0; i < s.length(); ++i){
-            if( i != 0){
-                un_set.erase(s[i-1]);
+        unordered_map<char, int> window;
+        int left = 0, right = 0;
+        int result =0;
+        while(right < s.size()){
+            char c = s[right];
+            right++;
+
+            window[c]++;
+            while(window[c] > 1){
+                char d = s[left];
+                left++;
+                window[d]--;
             }
-            while(right_k +1 <s.length() && un_set.count(s[right_k + 1]) == 0){
-                un_set.insert(s[right_k + 1]);
-                right_k++;
-            }
-            result = max(result, right_k - i +1);
+            result = max(result, right - left); 
         }
         return result;
     }

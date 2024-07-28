@@ -14,10 +14,10 @@ class LRUCache {
     // 1.get page
     void getRecentlyPage(int key){
         auto it = m_map.find(key);
-        // it.second == m_map[key];
+        // *it.second == m_map[key];
         if(it != m_map.end()){
             // auto temp_it = m_list.insert(m_list.end(),std::make_pair(key,it->second->second));
-            auto temp_it = m_list.insert(m_list.end(),it->second);
+            auto temp_it = m_list.insert(m_list.end(),*it->second);
             m_list.erase(it->second);
             m_map[key] = temp_it; 
         }
